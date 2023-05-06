@@ -74,7 +74,7 @@ class BaseClass {
       console.log(paymentID);
       return await fetch({ method: 'POST', url, headers, data: { paymentID } });
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(error.message); 
     }
   }
   async agreementStatus() {

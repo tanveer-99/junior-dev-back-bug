@@ -25,7 +25,7 @@ export const executePayment = ({ bkash, mail, config }) => async (req, res) => {
   let email = req.query.email;
   let paymentID = req.query.paymentID;
   const execute = await bkash.executeAgreement(paymentID);
-  console.log('hay',execute);
+  console.log('hayyyy',execute);
 
   if (Number(execute.statusCode) !== 2054) {
     const crtPayment = await bkash.createPayment({
