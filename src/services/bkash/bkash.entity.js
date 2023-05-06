@@ -25,14 +25,15 @@ export const executePayment = ({ bkash, mail, config }) => async (req, res) => {
   let email = req.query.email;
   let paymentID = req.query.paymentID;
   const execute = await bkash.executeAgreement(paymentID);
-  console.log('hayyyy',execute);
+  console.log('execute status: ',execute);
 
-  if (Number(execute.statusCode) !== 2054) {
+  if (Number(execute.statusCode) === 2054) {
     const crtPayment = await bkash.createPayment({
       mode: '0001', merchantAssociationInfo: 'MI05MID54RF09123456One',
       merchantInvoiceNumber: 'Inv0121', amount: req.query.totalPrice, agreementID: execute?.agreementID,
       baseURL: config.api + '/api/bkash/status?email=' + email
     });
+    console.log('crtPayment', crtPayment);
     let createPay = await bkash.executePayment({ paymentID: crtPayment.paymentID });
     // Send a Confirmation Email
     if (createPay.statusCode === '0000') {

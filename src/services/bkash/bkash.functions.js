@@ -70,9 +70,12 @@ class BaseClass {
   async executeAgreement(paymentID) {
     try {
       let url = this.baseUrl + '/execute';
-      let headers = { Authorization: this.token, 'X-APP-Key': this.appKey };
+      let headers = { 
+        Authorization: this.token, 
+        'X-APP-Key': this.appKey,};
+        
       console.log(paymentID);
-      return await fetch({ method: 'POST', url, headers, data: { paymentID } });
+      return await fetch({ method: 'POST', url, headers,  data:{paymentID} });
     } catch (error) {
       throw new Error(error.message); 
     }
